@@ -21,7 +21,7 @@ final router = GoRouter(
           child: BlocProvider(
             create: (context) =>
                 LoginCubit(loginRepository: context.read<LoginRepository>()),
-            child: const LoginPageSuccess(),
+            child: const LoginScreen(),
           ),
         );
       },

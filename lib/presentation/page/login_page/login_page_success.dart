@@ -25,6 +25,7 @@ class LoginPageSuccess extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: TextFormField(
                       style: const TextStyle(color: Colors.white70),
+                      obscureText: true,
                       decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.lock,

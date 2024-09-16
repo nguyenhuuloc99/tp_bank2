@@ -66,13 +66,19 @@ class LoginScreen extends StatelessWidget {
                             fillColor: Colors.transparent,
                             hintStyle: TextStyle(color: Colors.grey),
                             border: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
                             ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(),
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
                             ),
                             focusedErrorBorder: OutlineInputBorder(
                               borderSide: BorderSide(),
@@ -86,6 +92,7 @@ class LoginScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: TextFormField(
                         style: const TextStyle(color: Colors.white70),
+                        obscureText: true,
                         decoration: const InputDecoration(
                           prefixIcon: Icon(
                             Icons.lock,
@@ -96,9 +103,24 @@ class LoginScreen extends StatelessWidget {
                           hintText: 'Mật khẩu',
                           hintStyle: TextStyle(color: Colors.grey),
                           fillColor: Colors.transparent,
-                          border: OutlineInputBorder(
-                            borderSide: BorderSide(),
-                          ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.grey
+                              ),
+                            ),
+                            focusedErrorBorder: OutlineInputBorder(
+                              borderSide: BorderSide(),
+                            )
                         ),
                         controller:
                             context.read<LoginCubit>().passwordController,
@@ -136,7 +158,7 @@ class LoginScreen extends StatelessWidget {
                         padding: const EdgeInsets.all(16),
                         width: double.infinity,
                         decoration: BoxDecoration(
-                            color: const Color(0xFF7B35BB),
+                            color: const Color(0xFFDBC6EF),
                             borderRadius: BorderRadius.circular(12)),
                         child: const Text(
                           'MỞ TÀI KHOẢN ONLINE',
@@ -166,12 +188,20 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
-                    'Thông báo',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Thông báo',
+                      style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF7B35BB)),
+                    ),
                   ),
                   const SizedBox(height: 16),
-                  const Text('Tên png nhập hoặc mật khẩu không được để trống'),
+                  const Text(
+                    'Tên đăng nhập hoặc mật khẩu không được để trống',
+                  ),
                   const SizedBox(height: 16),
                   GestureDetector(
                     onTap: () {
@@ -198,7 +228,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text(
                     'Đăng Nhập Thất Bại',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold,  color: Color(0xFF7B35BB)),
                   ),
                   const SizedBox(height: 16),
                   const Text(
@@ -211,14 +241,14 @@ class LoginScreen extends StatelessWidget {
                         onTap: () {
                           context.pop();
                         },
-                        child: const Text('THỬ LẠI'),
+                        child: const Text('THỬ LẠI',style: TextStyle(color: Color(0xFF7B35BB)),),
                       ),
                       const SizedBox(width: 16),
                       GestureDetector(
                         onTap: () {
                           context.pop();
                         },
-                        child: const Text('QUÊN MẬT KHẨU'),
+                        child: const Text('QUÊN MẬT KHẨU',style: TextStyle(color: Color(0xFF7B35BB)),),
                       ),
                     ],
                   )
