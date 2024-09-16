@@ -24,10 +24,18 @@ class LoginSuccess extends LoginState {
 class LoginError extends LoginState {
   final ErrorType errorType;
 
-  LoginError(this.errorType);
+  LoginError({required this.errorType});
 
   @override
   List<Object?> get props => [errorType];
+
+  LoginError copyWith({
+    ErrorType? errorType,
+  }) {
+    return LoginError(
+      errorType: errorType ?? this.errorType,
+    );
+  }
 }
 
 enum ErrorType { emptyField, loginError }

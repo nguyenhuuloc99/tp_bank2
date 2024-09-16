@@ -4,10 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:tp_bank/presentation/cubit/login_cubit.dart';
 import 'package:tp_bank/presentation/page/login_page/login_page.dart';
 import 'package:tp_bank/service/repository/login_repository.dart';
+import 'package:tp_bank/utils/shared.dart';
 
 import '../presentation/page/login_page/login_page_success.dart';
 
 final router = GoRouter(
+  redirect: (context, state) {
+   return SharedManager.instance.getLogin() == true ? '/loginSuccess' : '/';
+  },
   routes: <RouteBase>[
     GoRoute(
       path: '/',
@@ -17,13 +21,13 @@ final router = GoRouter(
           child: BlocProvider(
             create: (context) =>
                 LoginCubit(loginRepository: context.read<LoginRepository>()),
-            child: const LoginScreen(),
+            child: const LoginPageSuccess(),
           ),
         );
       },
       routes: <RouteBase>[
         GoRoute(
-            path: '/loginSuccess',
+            path: 'loginSuccess',
             builder: (context, state) {
               return const LoginPageSuccess();
             })
