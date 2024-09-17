@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,7 +18,7 @@ class SharedManager {
     prefs = await SharedPreferences.getInstance();
   }
 
-   void save<T>(T value, String key) {
+  void save<T>(T value, String key) {
     if (value is String) {
       prefs.setString(key, value);
     }
@@ -36,10 +37,9 @@ class SharedManager {
     return prefs.getBool('Login') ?? false;
   }
 
+  String get getUserName => prefs.getString('userName') ?? '';
 
   static clearAll() {
     prefs.clear();
   }
-
-
 }

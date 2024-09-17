@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tp_bank/presentation/cubit/login_cubit.dart';
 import 'package:tp_bank/router/router.dart';
 import 'package:tp_bank/service/api_config/api_config.dart';
+import 'package:tp_bank/service/repository/login_repository.dart';
 import 'package:tp_bank/utils/shared.dart';
 
 void main() async {
@@ -20,9 +23,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      routerConfig: router,
+    return RepositoryProvider(
+      create: (context) => LoginRepository(),
+      child: BlocProvider(
+        create: (context) =>
+            LoginCubit(loginRepository: context.read<LoginRepository>()),
+        child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          routerConfig: router,
+        ),
+      ),
     );
   }
 }
