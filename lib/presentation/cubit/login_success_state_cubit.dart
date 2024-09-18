@@ -1,41 +1,18 @@
 import 'package:equatable/equatable.dart';
 
-sealed class LoginSuccessState extends Equatable {}
+class LoginSuccessState extends Equatable {
+  final String? message;
 
-class LoginSuccessInitial extends LoginSuccessState {
-  @override
-  List<Object?> get props => [];
-}
-
-class LoginLoading extends LoginSuccessState {
-  final bool isLoading;
-
-  LoginLoading(this.isLoading);
+  const LoginSuccessState({this.message});
 
   @override
-  List<Object?> get props => [isLoading];
-}
+  List<Object?> get props => [message];
 
-class LoginSuccess extends LoginSuccessState {
-  @override
-  List<Object?> get props => [];
-}
-
-class LoginError extends LoginSuccessState {
-  final ErrorType errorType;
-
-  LoginError({required this.errorType});
-
-  @override
-  List<Object?> get props => [errorType];
-
-  LoginError copyWith({
-    ErrorType? errorType,
+  LoginSuccessState copyWith({
+    String? message,
   }) {
-    return LoginError(
-      errorType: errorType ?? this.errorType,
+    return LoginSuccessState(
+      message: message ?? this.message,
     );
   }
 }
-
-enum ErrorType { emptyField, loginError }

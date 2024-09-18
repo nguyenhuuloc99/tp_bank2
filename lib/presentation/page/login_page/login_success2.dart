@@ -45,7 +45,7 @@ class LoginSuccess2 extends StatelessWidget {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         const Text(
-                          'Chúc bạn một png mới tốt lành',
+                          'Chúc bạn một ngày mới tốt lành',
                           style: TextStyle(color: Colors.white),
                         ),
                       ],

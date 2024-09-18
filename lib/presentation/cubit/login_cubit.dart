@@ -13,44 +13,40 @@ class LoginCubit extends Cubit<LoginState> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  LoginCubit({required this.loginRepository}) : super(LoginInitial());
+  LoginCubit({required this.loginRepository}) : super(LoginState());
 
   void login(BuildContext context) async {
-    print('-----------');
     if (userNameController.text.isNullOrEmpty ||
         passwordController.text.isNullOrEmpty) {
-      showDialogEmptyField(context);
+      emit(state.copyWith(
+          message: 'Tên đăng nhập hoặc mật khẩu không được để trống'));
       return;
+
     }
     try {
-      emit(LoginLoading(true));
       var response = await loginRepository.executeLogin(
           userNameController.text, passwordController.text);
       if (response['status'] == 200) {
-        SharedManager.instance.save(userNameController.text, 'userName');
+        context.pushReplacement('/lg2');
         SharedManager.instance.setUserName(response['data']['name']);
-        emit(LoginSuccess());
         SharedManager.instance.save(true, 'Login');
       }
     } catch (e) {
       if (e is DioError) {
-
         // The server responded with a non-2xx status code
         print('Error response data: ${e.response?.data}');
         print('Error status code: ${e.response?.statusCode}');
-        if(e.response?.statusCode == 500) {
-          showDialogError(context,'Your account is locked!' );
-        } else {
-          showDialogError(context,'Incorrect username or password' );
-        }
 
+        if (e.response?.statusCode == 500) {
+          emit(state.copyWith(message: 'Tài khoản của bạn bị khoá!'));
+        } else {
+          emit(state.copyWith(
+              message: 'Tên người dùng hoặc mật khẩu không đúng'));
+        }
       } else {
         // Other errors
         print('Unexpected error: $e');
       }
-      emit(LoginLoading(false));
-     // showDialogError(context);
-      emit(LoginError(errorType: ErrorType.loginError));
     }
   }
 
@@ -110,8 +106,7 @@ class LoginCubit extends Cubit<LoginState> {
                         color: Color(0xFF7B35BB)),
                   ),
                   const SizedBox(height: 16),
-                   Text(
-                     message),
+                  Text(message),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
