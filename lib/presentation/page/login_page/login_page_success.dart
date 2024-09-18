@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tp_bank/presentation/cubit/login_cubit.dart';
-import 'package:tp_bank/presentation/cubit/login_state.dart';
+import 'package:tp_bank/presentation/cubit/login_success_cubit.dart';
+import 'package:tp_bank/presentation/cubit/login_success_state_cubit.dart';
 
 class LoginPageSuccess extends StatelessWidget {
   const LoginPageSuccess({super.key});
@@ -22,10 +22,10 @@ class LoginPageSuccess extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              child: BlocListener<LoginCubit, LoginState>(
+              child: BlocListener<LoginSuccessCubit, LoginSuccessState>(
                 listener: (context, state) {
                   switch (state) {
-                    case LoginInitial():
+                    case LoginSuccessInitial():
                       break;
                     case LoginLoading():
                       break;
@@ -41,7 +41,9 @@ class LoginPageSuccess extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: TextFormField(
-                        controller: context.read<LoginCubit>().passwordController,
+                        controller: context
+                            .read<LoginSuccessCubit>()
+                            .passwordController,
                         style: const TextStyle(color: Colors.white70),
                         obscureText: true,
                         decoration: const InputDecoration(
@@ -71,7 +73,7 @@ class LoginPageSuccess extends StatelessWidget {
                     const SizedBox(height: 60),
                     GestureDetector(
                       onTap: () {
-                        context.read<LoginCubit>().login(context);
+                        context.read<LoginSuccessCubit>().login(context);
                       },
                       child: Container(
                         alignment: Alignment.center,

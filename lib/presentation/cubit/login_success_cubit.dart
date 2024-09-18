@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tp_bank/presentation/cubit/login_state.dart';
 import 'package:tp_bank/utils/extensions.dart';
 import 'package:tp_bank/utils/shared.dart';
 
 import '../../service/repository/login_repository.dart';
+import 'login_success_state_cubit.dart';
 
-class LoginCubit extends Cubit<LoginState> {
+class LoginSuccessCubit extends Cubit<LoginSuccessState> {
   LoginRepository loginRepository;
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  LoginCubit({required this.loginRepository}) : super(LoginInitial());
+  LoginSuccessCubit({required this.loginRepository})
+      : super(LoginSuccessInitial());
 
   void login(BuildContext context) async {
-    if (userNameController.text.isNullOrEmpty ||
-        passwordController.text.isNullOrEmpty) {
+    if (passwordController.text.isNullOrEmpty) {
       showDialogEmptyField(context);
       return;
     }
     try {
       emit(LoginLoading(true));
-
       var response = await loginRepository.executeLogin(
-          userNameController.text, passwordController.text);
+          SharedManager.instance.getUserName, passwordController.text);
       if (response == 200) {
         emit(LoginSuccess());
         SharedManager.instance.save(userNameController.text, 'userName');
