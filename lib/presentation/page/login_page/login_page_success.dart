@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tp_bank/presentation/cubit/login_success_cubit.dart';
 import 'package:tp_bank/presentation/cubit/login_success_state_cubit.dart';
 
+import '../../../utils/shared.dart';
+
 class LoginPageSuccess extends StatelessWidget {
   const LoginPageSuccess({super.key});
 
@@ -36,8 +38,31 @@ class LoginPageSuccess extends StatelessWidget {
                   }
                 },
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 280),
+                    const SizedBox(height: 80,),
+                    Container(
+                      margin: const EdgeInsets.only(left: 100),
+                      child:  Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Xin chào', style: TextStyle(color: Colors.white),),
+                              Text(SharedManager.instance.getUserName(), style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
+                              const Text('Chúc bạn một png mới tốt lành', style: TextStyle(color: Colors.white),),
+                            ],
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              context.push('/login');
+                            },
+                            child: Image.asset('assets/images/icon_back.png'),
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 100),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
                       child: TextFormField(
@@ -70,7 +95,7 @@ class LoginPageSuccess extends StatelessWidget {
                             )),
                       ),
                     ),
-                    const SizedBox(height: 60),
+                    const SizedBox(height: 80),
                     GestureDetector(
                       onTap: () {
                         context.read<LoginSuccessCubit>().login(context);

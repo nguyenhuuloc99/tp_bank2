@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
           _controller.play();
         });
       });
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       SharedManager.instance.getLogin() == true
           ? context.pushReplacement('/loginSuccess')
           : context.pushReplacement('/login');

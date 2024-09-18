@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +16,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginRepository}) : super(LoginInitial());
 
   void login(BuildContext context) async {
+    print('-----------');
     if (userNameController.text.isNullOrEmpty ||
         passwordController.text.isNullOrEmpty) {
       showDialogEmptyField(context);
@@ -22,17 +24,32 @@ class LoginCubit extends Cubit<LoginState> {
     }
     try {
       emit(LoginLoading(true));
-
       var response = await loginRepository.executeLogin(
           userNameController.text, passwordController.text);
-      if (response == 200) {
-        emit(LoginSuccess());
+      if (response['status'] == 200) {
         SharedManager.instance.save(userNameController.text, 'userName');
+        SharedManager.instance.setUserName(userNameController.text,);
+        emit(LoginSuccess());
         SharedManager.instance.save(true, 'Login');
       }
     } catch (e) {
+      if (e is DioError) {
+
+        // The server responded with a non-2xx status code
+        print('Error response data: ${e.response?.data}');
+        print('Error status code: ${e.response?.statusCode}');
+        if(e.response?.statusCode == 500) {
+          showDialogError(context,'Your account is locked!' );
+        } else {
+          showDialogError(context,'Incorrect username or password' );
+        }
+
+      } else {
+        // Other errors
+        print('Unexpected error: $e');
+      }
       emit(LoginLoading(false));
-      showDialogError(context);
+     // showDialogError(context);
       emit(LoginError(errorType: ErrorType.loginError));
     }
   }
@@ -75,7 +92,7 @@ class LoginCubit extends Cubit<LoginState> {
         });
   }
 
-  void showDialogError(BuildContext context) {
+  void showDialogError(BuildContext context, String message) {
     showDialog(
         context: context,
         builder: (context) {
@@ -93,8 +110,8 @@ class LoginCubit extends Cubit<LoginState> {
                         color: Color(0xFF7B35BB)),
                   ),
                   const SizedBox(height: 16),
-                  const Text(
-                      'Tên đăng nhập hoặc mật khẩu không đúng. Tài khoản của Bạn sẽ bị khoá nếu nhập sai 5 lần!'),
+                   Text(
+                     message),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,

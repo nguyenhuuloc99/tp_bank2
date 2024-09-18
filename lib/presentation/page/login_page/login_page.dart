@@ -5,8 +5,21 @@ import 'package:tp_bank/presentation/cubit/login_cubit.dart';
 
 import '../../cubit/login_state.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+
+  @override
+  void initState() {
+    context.read<LoginCubit>().userNameController.text = '';
+    context.read<LoginCubit>().passwordController.text = '';
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
