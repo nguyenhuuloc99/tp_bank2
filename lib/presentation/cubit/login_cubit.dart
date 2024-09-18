@@ -28,7 +28,7 @@ class LoginCubit extends Cubit<LoginState> {
           userNameController.text, passwordController.text);
       if (response['status'] == 200) {
         SharedManager.instance.save(userNameController.text, 'userName');
-        SharedManager.instance.setUserName(userNameController.text,);
+        SharedManager.instance.setUserName(response['data']['name']);
         emit(LoginSuccess());
         SharedManager.instance.save(true, 'Login');
       }
