@@ -6,7 +6,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tp_bank/presentation/cubit/login_state.dart';
 import 'package:tp_bank/utils/extensions.dart';
 import 'package:tp_bank/utils/shared.dart';
-
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+import 'package:url_launcher/url_launcher.dart';
 import '../../service/repository/login_repository.dart';
 
 class LoginCubit extends Cubit<LoginState> {
@@ -73,8 +74,13 @@ class LoginCubit extends Cubit<LoginState> {
                 ),
               ),
               CupertinoDialogAction(
-                onPressed: () {
+                onPressed: () async{
                   context.pop();
+                  final Uri launchUri = Uri(
+                    scheme: 'tel',
+                    path: '1900585885',
+                  );
+                  await launchUrl(launchUri);
                 },
                 child: const Text(
                   "Gọi ngay",
