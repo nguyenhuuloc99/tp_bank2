@@ -98,7 +98,7 @@ class LoginPageSuccess extends StatelessWidget {
                       builder: (context, state) {
                     return Container(
                       alignment: Alignment.center,
-                      margin: const EdgeInsets.only(top: 30),
+                      margin: const EdgeInsets.only(top: 5),
                       child: Text(
                         state.message ?? '',
                         style: const TextStyle(

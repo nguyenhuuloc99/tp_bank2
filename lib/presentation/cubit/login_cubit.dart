@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -38,7 +39,8 @@ class LoginCubit extends Cubit<LoginState> {
         print('Error status code: ${e.response?.statusCode}');
 
         if (e.response?.statusCode == 500) {
-          emit(state.copyWith(message: 'Tài khoản của bạn bị khoá!'));
+          emit(state.copyWith(message: ''));
+          showDialogErr(context);
         } else {
           emit(state.copyWith(
               message: 'Tên người dùng hoặc mật khẩu không đúng'));
@@ -50,91 +52,37 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  void showDialogEmptyField(BuildContext context) {
-    showDialog(
+  showDialogErr(BuildContext context) {
+    showCupertinoDialog(
         context: context,
         builder: (context) {
-          return Dialog(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Thông báo',
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF7B35BB)),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Tên đăng nhập hoặc mật khẩu không được để trống',
-                  ),
-                  const SizedBox(height: 16),
-                  GestureDetector(
-                    onTap: () {
-                      context.pop();
-                    },
-                    child: const Text('Đồng ý'),
-                  )
-                ],
+          return CupertinoAlertDialog(
+            title: const Text("Tài Khoản Đã Bị Tạm Khoá"),
+            content: const Text(
+                "Tài khoản đã bị tạm khoá do nhập sai thông tin đăng nhập 5 lần. Bạn vui lòng tới điểm GD/LiveBank 24/7 gần nhất hoặc liên hệ Hotline để được hỗ trợ."),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                onPressed: () {
+                  context.pop();
+                },
+                isDefaultAction: true,
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                      color: CupertinoColors.activeOrange, fontSize: 16, fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-          );
-        });
-  }
-
-  void showDialogError(BuildContext context, String message) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return Dialog(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Đăng Nhập Thất Bại',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF7B35BB)),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(message),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
-                        child: const Text(
-                          'THỬ LẠI',
-                          style: TextStyle(color: Color(0xFF7B35BB)),
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      GestureDetector(
-                        onTap: () {
-                          context.pop();
-                        },
-                        child: const Text(
-                          'QUÊN MẬT KHẨU',
-                          style: TextStyle(color: Color(0xFF7B35BB)),
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
+              CupertinoDialogAction(
+                onPressed: () {
+                  context.pop();
+                },
+                child: const Text(
+                  "Gọi ngay",
+                  style: TextStyle(
+                      color: CupertinoColors.activeOrange, fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+              )
+            ],
           );
         });
   }
