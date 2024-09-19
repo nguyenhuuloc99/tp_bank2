@@ -20,24 +20,37 @@ class LoginPageSuccess extends StatelessWidget {
             child: Container(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/bg_image.jpg"),
+                  image: AssetImage("assets/images/bg_app.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
-              child:  Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 80,),
+                  const SizedBox(
+                    height: 80,
+                  ),
                   Container(
                     margin: const EdgeInsets.only(left: 100),
-                    child:  Row(
+                    child: Row(
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Xin chào', style: TextStyle(color: Colors.white),),
-                            Text(SharedManager.instance.getUserName(), style: const TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
-                            const Text('Chúc bạn một ngày mới tốt lành', style: TextStyle(color: Colors.white),),
+                            const Text(
+                              'Xin chào',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              SharedManager.instance.getUserName(),
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            const Text(
+                              'Chúc bạn một ngày mới tốt lành',
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ],
                         ),
                         GestureDetector(
@@ -53,9 +66,8 @@ class LoginPageSuccess extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: TextFormField(
-                      controller: context
-                          .read<LoginSuccessCubit>()
-                          .passwordController,
+                      controller:
+                          context.read<LoginSuccessCubit>().passwordController,
                       style: const TextStyle(color: Colors.white70),
                       obscureText: true,
                       decoration: const InputDecoration(
@@ -84,15 +96,19 @@ class LoginPageSuccess extends StatelessWidget {
                   ),
                   BlocBuilder<LoginSuccessCubit, LoginSuccessState>(
                       builder: (context, state) {
-                        return Container(
-                          alignment: Alignment.center,
-                          margin: const EdgeInsets.only(top: 5),
-                          child: const Text('',style: TextStyle(
-                            color: Color(0xFFC48066),
-                          ),textAlign: TextAlign.center,),
-                        );
-                        return const SizedBox.shrink();
-                      }),
+                    return Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(top: 30),
+                      child: Text(
+                        state.message ?? '',
+                        style: const TextStyle(
+                          color: Color(0xFFC48066),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    );
+                    return const SizedBox.shrink();
+                  }),
                   const SizedBox(height: 80),
                   GestureDetector(
                     onTap: () {
