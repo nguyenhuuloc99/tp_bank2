@@ -123,7 +123,7 @@ class LoginPageSuccess extends StatelessWidget {
                           color: const Color(0xFF7B35BB),
                           borderRadius: BorderRadius.circular(12)),
                       child: const Text(
-                        'ĐĂNG NHẬP',
+                        'Đăng nhập',
                         style: TextStyle(
                             color: Color(0xFFC48066),
                             fontWeight: FontWeight.bold),

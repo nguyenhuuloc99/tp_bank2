@@ -33,15 +33,15 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/logo_app.jpg"),
+                image: AssetImage("assets/images/bg_3.jpg"),
                 fit: BoxFit.cover,
               ),
             ),
             child: Column(
               children: [
-                const SizedBox(height: 195),
+                const SizedBox(height: 230),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextFormField(
                     style: const TextStyle(color: Colors.white70),
                     decoration: const InputDecoration(
@@ -64,9 +64,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     controller: context.read<LoginCubit>().userNameController,
                   ),
                 ),
-                const SizedBox(height: 13),
+                const SizedBox(height: 15),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: TextFormField(
                     style: const TextStyle(color: Colors.white70),
                     obscureText: true,
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
                   return Container(
                     alignment: Alignment.center,
-                    margin: const EdgeInsets.only(top: 5),
+                    margin: const EdgeInsets.only(top: 15),
                     child: Text(
                       state.message ?? '',
                       style: const TextStyle(
@@ -103,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   );
                 }),
-                const SizedBox(height: 20),
+                const SizedBox(height: 35),
                 GestureDetector(
                   onTap: () {
                     context.read<LoginCubit>().login(context);
