@@ -60,8 +60,7 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
         builder: (context) {
           return CupertinoAlertDialog(
             title: const Text("Tài Khoản Đã Bị Tạm Khoá"),
-            content: const Text(
-                "Tài khoản đã bị tạm khoá do nhập sai thông tin đăng nhập 5 lần. Bạn vui lòng tới điểm GD/LiveBank 24/7 gần nhất hoặc liên hệ Hotline để được hỗ trợ."),
+            content:  Text(message),
             actions: <Widget>[
               CupertinoDialogAction(
                 onPressed: () {
