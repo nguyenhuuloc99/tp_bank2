@@ -20,11 +20,6 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
       : super(const LoginSuccessState());
 
   void login(BuildContext context) async {
-    if (passwordController.text.isNullOrEmpty) {
-      emit(state.copyWith(
-          message: 'Tên đăng nhập hoặc mật khẩu không được để trống'));
-      return;
-    }
     try {
       print('-----------${SharedManager.instance.getUserName}');
       var response = await loginRepository.executeLogin(
@@ -41,12 +36,16 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
         // The server responded with a non-2xx status code
         print('Error response data: ${e.response?.data}');
         print('Error status code: ${e.response?.statusCode}');
+        if(e.response?.statusCode == 401) {
+          emit(state.copyWith(message: e.response?.data['detail']));
+          return;
+        }
         if (e.response?.statusCode == 500) {
           emit(state.copyWith(message: ''));
-          showDialogErr(context);
+          showDialogErr(context, e.response?.data['message']);
         } else {
           emit(state.copyWith(
-              message: 'Tên người dùng hoặc mật khẩu không đúng'));
+              message:  e.response?.data['message']));
         }
       } else {
         // Other errors
@@ -55,7 +54,7 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
     }
   }
 
-  showDialogErr(BuildContext context) {
+  showDialogErr(BuildContext context, String message) {
     showCupertinoDialog(
         context: context,
         builder: (context) {

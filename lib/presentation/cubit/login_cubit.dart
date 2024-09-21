@@ -18,13 +18,6 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit({required this.loginRepository}) : super(LoginState());
 
   void login(BuildContext context) async {
-    if (userNameController.text.isNullOrEmpty ||
-        passwordController.text.isNullOrEmpty) {
-      emit(state.copyWith(
-          message: 'Tên đăng nhập hoặc mật khẩu không được để trống'));
-      return;
-
-    }
     try {
       var response = await loginRepository.executeLogin(
           userNameController.text, passwordController.text);
@@ -38,13 +31,16 @@ class LoginCubit extends Cubit<LoginState> {
         // The server responded with a non-2xx status code
         print('Error response data: ${e.response?.data}');
         print('Error status code: ${e.response?.statusCode}');
-
+        if(e.response?.statusCode == 401) {
+          emit(state.copyWith(message: e.response?.data['detail']));
+          return;
+        }
         if (e.response?.statusCode == 500) {
           emit(state.copyWith(message: ''));
-          showDialogErr(context);
+          showDialogErr(context, e.response?.data['message']);
         } else {
           emit(state.copyWith(
-              message: 'Tên người dùng hoặc mật khẩu không đúng'));
+              message:  e.response?.data['message']));
         }
       } else {
         // Other errors
@@ -53,14 +49,13 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  showDialogErr(BuildContext context) {
+  showDialogErr(BuildContext context, String message) {
     showCupertinoDialog(
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
             title: const Text("Tài Khoản Đã Bị Tạm Khoá"),
-            content: const Text(
-                "Tài khoản đã bị tạm khoá do nhập sai thông tin đăng nhập 5 lần. Bạn vui lòng tới điểm GD/LiveBank 24/7 gần nhất hoặc liên hệ Hotline để được hỗ trợ."),
+            content:  Text(message),
             actions: <Widget>[
               CupertinoDialogAction(
                 onPressed: () {
