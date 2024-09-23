@@ -30,14 +30,11 @@ class LoginPageSuccess extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: Image.asset(
-                      'assets/images/tpb_logo.png',
-                      width: 150,
-                      height: 100,
-                      fit: BoxFit.contain,
-                    ),
+                  Image.asset(
+                    'assets/images/tpb_logo.png',
+                    width: 150,
+                    height: 60,
+                    fit: BoxFit.contain,
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 30),

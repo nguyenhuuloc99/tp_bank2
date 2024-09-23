@@ -42,30 +42,55 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30),
-                  child: Image.asset(
-                    'assets/images/tpb_logo.png',
-                    width: 150,
-                    height: 100,
-                    fit: BoxFit.contain,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        'assets/images/tpb_logo.png',
+                        width: 150,
+                        height: 60,
+                        fit: BoxFit.contain,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color(0xFFf4f2f7).withOpacity(0.8)),
+                        child: Row(
+                          children: [
+                            const Text('VI',style: TextStyle(fontFamily: 'roboto'),),
+                            const SizedBox(width: 4),
+                            SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.asset('assets/images/vn_square.png',
+                                    width: 20, height: 20),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                const Center(
-                  child: Text('TpBank xin chào Bạn!'),
+                const SizedBox(
+                  height: 20,
                 ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.heart_broken_sharp),
-                    Icon(Icons.heart_broken_sharp),
-                    Icon(Icons.heart_broken_sharp),
-                  ],
+                const Center(
+                  child: Text('TPBank xin chào Bạn!'),
+                ),
+                Center(
+                  child: Text(
+                      '${String.fromCharCode(0x1F49C)} ${String.fromCharCode(0x1F9E1)} ${String.fromCharCode(0x1F49C)}'),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 40,
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
@@ -73,37 +98,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
+                        enableInteractiveSelection: false,
+                        cursorColor: const Color(0xFFC48066),
                         style: const TextStyle(
                             color: Colors.white70, fontFamily: 'roboto'),
                         decoration: InputDecoration(
-                            prefixIcon: SizedBox(
-                              height: 1,
-                              width: 1,
-                              child: FittedBox(
-                                child: SvgPicture.asset(
-                                  'assets/images/ic_account.svg',
-                                  width: 1,
-                                  height: 1,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: SvgPicture.asset(
+                                'assets/images/ic_account.svg',
+                                fit: BoxFit.cover,
                               ),
                             ),
                             filled: true,
                             hintText: 'Tên đăng nhập',
-                            contentPadding:
-                                const EdgeInsets.only(left: 40, top: 5),
+                            contentPadding: const EdgeInsets.only(top: 5),
                             fillColor: const Color(0xFF9086A9),
-                            hintStyle: const TextStyle(color: Colors.black38),
-                            suffixIcon: SizedBox(
-                              height: 1,
-                              width: 1,
-                              child: FittedBox(
-                                child: SvgPicture.asset(
-                                  'assets/images/ic_info.svg',
-                                  width: 1,
-                                  height: 1,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            hintStyle: const TextStyle(color: Colors.white70),
+                            prefixIconConstraints: const BoxConstraints(
+                                minWidth: 25, minHeight: 25),
+                            suffixIconConstraints: const BoxConstraints(
+                                minWidth: 30, minHeight: 25),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: SvgPicture.asset(
+                                'assets/images/ic_info.svg',
+                                fit: BoxFit.cover,
                               ),
                             ),
                             border: const OutlineInputBorder(
@@ -126,40 +146,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 30),
                       child: TextFormField(
+                        cursorColor: const Color(0xFFC48066),
+                        enableInteractiveSelection: false,
                         style: const TextStyle(
                             color: Colors.white70, fontFamily: 'roboto'),
                         obscureText: true,
                         decoration: InputDecoration(
-                            prefixIcon: SizedBox(
-                              height: 1,
-                              width: 1,
-                              child: FittedBox(
-                                child: SvgPicture.asset(
-                                  'assets/images/ic_password.svg',
-                                  width: 1,
-                                  height: 1,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            prefixIconConstraints: const BoxConstraints(
+                                minWidth: 25, minHeight: 25),
+                            suffixIconConstraints: const BoxConstraints(
+                                minWidth: 25, minHeight: 25),
+                            prefixIcon: Padding(
+                              padding: const EdgeInsets.only(left: 8, right: 8),
+                              child: SvgPicture.asset(
+                                'assets/images/ic_password.svg',
+                                fit: BoxFit.cover,
                               ),
                             ),
                             filled: true,
-                            suffixIcon: SizedBox(
-                              height: 1,
-                              width: 1,
-                              child: FittedBox(
-                                child: SvgPicture.asset(
-                                  'assets/images/ic_eye_active.svg',
-                                  width: 1,
-                                  height: 1,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: SvgPicture.asset(
+                                'assets/images/ic_eye_active.svg',
+                                fit: BoxFit.cover,
                               ),
                             ),
                             hintText: 'Mật khẩu',
                             contentPadding:
                                 const EdgeInsets.only(left: 40, top: 5),
                             fillColor: const Color(0xFF9086A9),
-                            hintStyle: const TextStyle(color: Colors.black38),
+                            hintStyle: const TextStyle(color: Colors.white70),
                             border: const OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.transparent),
                             ),
@@ -178,18 +194,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     BlocBuilder<LoginCubit, LoginState>(
                         builder: (context, state) {
-                      return Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(top: 15),
-                        child: Text(
-                          state.message ?? '',
-                          style: const TextStyle(
-                              color: Color(0xFFC48066), fontFamily: 'roboto'),
-                          textAlign: TextAlign.center,
+                      return Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          alignment: Alignment.center,
+                          child: Text(
+                            state.message ?? '',
+                            style: const TextStyle(
+                                color: Color(0xFFC48066), fontFamily: 'roboto'),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       );
                     }),
-                    const SizedBox(height: 35),
+                    const SizedBox(height: 20),
                     GestureDetector(
                       onTap: () {
                         context.read<LoginCubit>().login(context);
@@ -201,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: const Color(0xFF7B35BA),
-                            borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.circular(30)),
                         child: const Text('Đăng nhập',
                             style: TextStyle(
                                 color: Color(0xFFC48066),
@@ -209,9 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 fontFamily: 'roboto')),
                       ),
                     ),
-                    const SizedBox(
-                      height: 32,
-                    ),
+                    const SizedBox(height: 28),
                     GestureDetector(
                       onTap: () {},
                       child: Container(
@@ -221,10 +237,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: double.infinity,
                         decoration: BoxDecoration(
                             color: const Color(0xFFDBC6EF),
-                            borderRadius: BorderRadius.circular(12)),
+                            borderRadius: BorderRadius.circular(30)),
                         child: const Text('Mở tài khoản online',
                             style: TextStyle(
-                                color: Color(0xFF7B35BA),
                                 fontWeight: FontWeight.bold,
                                 fontFamily: 'roboto')),
                       ),
@@ -236,31 +251,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Column(
-                      children: [
-                        Image.asset('assets/images/ic_etoken_kyc.webp',width: 30,height: 30,),
-                        const Text(
-                          'Smart OTP từ\neToken+',
-                          style: TextStyle(
-                            fontFamily: 'roboto',
-                          ),
-                          textAlign: TextAlign.center,
-                        )
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        SvgPicture.asset(
-                          'assets/images/ic_qr_login_30dp.svg',
-                          height: 30,
-                          width: 30,
-                        ),
-                        const Text(
-                          'QR Pay',
-                          style: TextStyle(fontFamily: 'roboto'),
-                        )
-                      ],
-                    ),
+                    _contentApp('assets/images/ic_etoken_kyc.webp',
+                        'Smart OTP từ\neToken+'),
+                    _contentApp('assets/images/ic_qr_login_30dp.svg', 'QR Pay'),
                   ],
                 ),
                 const Spacer(),
@@ -270,56 +263,17 @@ class _LoginScreenState extends State<LoginScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/ic_location_login_30dp.svg',
-                            height: 30,
-                            width: 30,
-                          ),
-                          const Text('Điểm GD',
-                              style: TextStyle(fontFamily: 'roboto'))
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/ic_exchange_login_30dp.svg',
-                            height: 30,
-                            width: 30,
-                          ),
-                          const Text('Tỷ giá',
-                              style: TextStyle(fontFamily: 'roboto'))
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/ic_help_center_login.svg',
-                            height: 30,
-                            width: 30,
-                          ),
-                          const Text(
-                            'Trung tâm\ntrợ giúp',
-                            style: TextStyle(fontFamily: 'roboto'),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/images/commonsdk_ic_cake_new.svg',
-                            height: 30,
-                            width: 30,
-                          ),
-                          const Text(
-                            'Đăng nhập\nTK Con yêu',
-                            style: TextStyle(fontFamily: 'roboto'),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      ),
+                      _contentAppBottom(
+                          'assets/images/ic_location_login_30dp.svg',
+                          'Điểm GD'),
+                      _contentAppBottom(
+                          'assets/images/ic_exchange_login_30dp.svg', 'Tỷ giá'),
+                      _contentAppBottom(
+                          'assets/images/ic_help_center_login.svg',
+                          'Trung tâm\ntrợ giúp'),
+                      _contentAppBottom(
+                          'assets/images/commonsdk_ic_cake_new.svg',
+                          'Đăng nhập\nTK Con yêu'),
                     ],
                   ),
                 ),
@@ -331,6 +285,52 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _contentApp(String asset, String content) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: const Color(0xFFf4f2f7).withOpacity(0.5)),
+          child: asset.contains('svg')
+              ? SvgPicture.asset(
+                  asset,
+                  height: 30,
+                  width: 30,
+                )
+              : Image.asset(
+                  asset,
+                  width: 30,
+                  height: 30,
+                ),
+        ),
+        Text(
+          content,
+          style: const TextStyle(
+            fontFamily: 'roboto',
+          ),
+          textAlign: TextAlign.center,
+        )
+      ],
+    );
+  }
+
+  Widget _contentAppBottom(String asset, String content) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        SvgPicture.asset(
+          asset,
+          height: 30,
+          width: 30,
+        ),
+        Text(content, style: TextStyle(fontFamily: 'roboto'))
+      ],
     );
   }
 }
