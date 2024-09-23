@@ -14,6 +14,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _passwordVisible = false;
+
   @override
   void initState() {
     context.read<LoginCubit>().userNameController.text = '';
@@ -150,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         enableInteractiveSelection: false,
                         style: const TextStyle(
                             color: Colors.white70, fontFamily: 'roboto'),
-                        obscureText: true,
+                        obscureText: !_passwordVisible,
                         decoration: InputDecoration(
                             prefixIconConstraints: const BoxConstraints(
                                 minWidth: 25, minHeight: 25),
@@ -164,11 +166,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             ),
                             filled: true,
-                            suffixIcon: Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: SvgPicture.asset(
-                                'assets/images/ic_eye_active.svg',
-                                fit: BoxFit.cover,
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  _passwordVisible = !_passwordVisible;
+                                });
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: SvgPicture.asset(
+                                  _passwordVisible ? 'assets/images/ic_eye_inactive_off.svg' : 'assets/images/ic_eye_active.svg',
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                             hintText: 'Mật khẩu',
