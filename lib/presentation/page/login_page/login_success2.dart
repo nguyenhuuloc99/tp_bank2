@@ -20,7 +20,7 @@ class LoginSuccess2 extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/bg_app.jpg"),
+                  image: AssetImage("assets/images/bg_app_2.jpg"),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -30,24 +30,41 @@ class LoginSuccess2 extends StatelessWidget {
                   const SizedBox(
                     height: 80,
                   ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 100),
-                    child:  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 30),
+                    child: Row(
                       children: [
-                        const Text(
-                          'Xin chào',
-                          style: TextStyle(color: Colors.white),
+                        Image.asset(
+                          'assets/images/qr_code.jpg',
+                          width: 40,
+                          height: 40,
                         ),
-                        Text(
-                          SharedManager.instance.getUserName(),
-                          style: const TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
+                        const SizedBox(
+                          width: 30,
                         ),
-                        const Text(
-                          'Chúc bạn một ngày mới tốt lành',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                        Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Xin chào',
+                                  style: TextStyle(color: Color(0xFFC48066)),
+                                ),
+                                Text(
+                                  SharedManager.instance.getUserName(),
+                                  style: const TextStyle(
+                                      color: Color(0xFFC48066),
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const Text(
+                                  'Chúc bạn một ngày mới tốt lành',
+                                  style: TextStyle(color: Color(0xFFC48066)),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   )

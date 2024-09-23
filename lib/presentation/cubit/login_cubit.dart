@@ -31,7 +31,7 @@ class LoginCubit extends Cubit<LoginState> {
         // The server responded with a non-2xx status code
         print('Error response data: ${e.response?.data}');
         print('Error status code: ${e.response?.statusCode}');
-        if(e.response?.statusCode == 401) {
+        if (e.response?.statusCode == 401) {
           emit(state.copyWith(message: e.response?.data['detail']));
           return;
         }
@@ -39,8 +39,7 @@ class LoginCubit extends Cubit<LoginState> {
           emit(state.copyWith(message: ''));
           showDialogErr(context, e.response?.data['message']);
         } else {
-          emit(state.copyWith(
-              message:  e.response?.data['message']));
+          emit(state.copyWith(message: e.response?.data['message']));
         }
       } else {
         // Other errors
@@ -54,8 +53,11 @@ class LoginCubit extends Cubit<LoginState> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: const Text("Tài Khoản Đã Bị Tạm Khoá"),
-            content:  Text(message),
+            title: const Text(
+              "Tài Khoản Đã Bị Tạm Khoá",
+              style: TextStyle(fontFamily: 'roboto'),
+            ),
+            content: Text(message),
             actions: <Widget>[
               CupertinoDialogAction(
                 onPressed: () {
@@ -65,11 +67,14 @@ class LoginCubit extends Cubit<LoginState> {
                 child: const Text(
                   "Đóng",
                   style: TextStyle(
-                      color: CupertinoColors.activeOrange, fontSize: 16, fontWeight: FontWeight.bold),
+                      color: CupertinoColors.activeOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'roboto'),
                 ),
               ),
               CupertinoDialogAction(
-                onPressed: () async{
+                onPressed: () async {
                   context.pop();
                   final Uri launchUri = Uri(
                     scheme: 'tel',
@@ -80,7 +85,10 @@ class LoginCubit extends Cubit<LoginState> {
                 child: const Text(
                   "Gọi ngay",
                   style: TextStyle(
-                      color: CupertinoColors.activeOrange, fontSize: 16, fontWeight: FontWeight.bold),
+                      color: CupertinoColors.activeOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'roboto'),
                 ),
               )
             ],

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:video_player/video_player.dart';
+import 'package:lottie/lottie.dart';
 
 import '../../../utils/shared.dart';
 
@@ -12,21 +11,19 @@ class Splash extends StatefulWidget {
   State<Splash> createState() => _SplashState();
 }
 
-class _SplashState extends State<Splash> {
-  late VideoPlayerController _controller;
+class _SplashState extends State<Splash>  with TickerProviderStateMixin{
+  late final AnimationController _controller;
 
   @override
   void initState() {
-    _controller = VideoPlayerController.asset('assets/images/video.mp4')
-      ..initialize().then((_) {
-        setState(() {
-          _controller.play();
-        });
-      });
-    Future.delayed(const Duration(seconds: 3), () {
-      SharedManager.instance.getLogin() == true
-          ? context.pushReplacement('/loginSuccess')
-          : context.pushReplacement('/login');
+    _controller = AnimationController(vsync: this);
+
+    _controller.addStatusListener((status) {
+      if(status == AnimationStatus.completed) {
+        SharedManager.instance.getLogin() == true
+            ? context.pushReplacement('/loginSuccess')
+            : context.pushReplacement('/login');
+      }
     });
     super.initState();
   }
@@ -41,9 +38,15 @@ class _SplashState extends State<Splash> {
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () => FocusScope.of(context).unfocus(),
-          child: _controller.value.isInitialized
-              ? Expanded(child: VideoPlayer(_controller))
-              : Container(),
+          child: Lottie.asset('assets/images/mv_splash_final.json',
+              onLoaded: (composition) {
+                _controller
+                  ..duration = composition.duration
+                  ..forward();
+              },
+              height: MediaQuery.of(context).size.height,
+              fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width),
         ),
       ),
     );
