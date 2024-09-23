@@ -338,7 +338,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 30,
           width: 30,
         ),
-        Text(content, style: TextStyle(fontFamily: 'roboto'))
+        Text(content, style: const TextStyle(fontFamily: 'roboto'))
       ],
     );
   }
