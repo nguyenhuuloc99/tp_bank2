@@ -123,7 +123,7 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                           ],
                         ),
                         const SizedBox(
-                          width: 12,
+                          width: 10,
                         ),
                         Row(
                           children: [
@@ -140,9 +140,9 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                                       color: Color(0xFF2B1F51),
                                       fontWeight: FontWeight.bold),
                                 ),
-                                const Text(
-                                  'Chúc bạn một ngày mới tốt lành',
-                                  style: TextStyle(color: Colors.grey),
+                                 Text(
+                                    'Chúc bạn một ngày mới tốt lành ${String.fromCharCode(0x1F44F)}',
+                                  style: const TextStyle(color: Colors.grey),
                                 ),
                               ],
                             ),
