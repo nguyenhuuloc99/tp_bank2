@@ -221,11 +221,11 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                   ),
                   BlocBuilder<LoginSuccessCubit, LoginSuccessState>(
                       builder: (context, state) {
-                    return Expanded(
+                    return const Expanded(
                         child: Center(
                       child: Text(
-                        state.message ?? '',
-                        style: const TextStyle(
+                        'Không đăng nhập được?',
+                        style: TextStyle(
                           color: Color(0xFFC48066),
                         ),
                         textAlign: TextAlign.center,
