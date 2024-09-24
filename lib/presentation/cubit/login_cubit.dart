@@ -23,6 +23,7 @@ class LoginCubit extends Cubit<LoginState> {
           userNameController.text, passwordController.text);
       if (response['status'] == 200) {
         context.pushReplacement('/lg2');
+        SharedManager.instance.setUserNameLogin(userNameController.text,);
         SharedManager.instance.setUserName(response['data']['name']);
         SharedManager.instance.save(true, 'Login');
       }
@@ -54,7 +55,7 @@ class LoginCubit extends Cubit<LoginState> {
         builder: (context) {
           return CupertinoAlertDialog(
             title: const Text(
-              "Tài Khoản Đã Bị Tạm Khoá",
+              "Thông báo",
               style: TextStyle(fontFamily: 'roboto'),
             ),
             content: Text(message),
@@ -95,4 +96,5 @@ class LoginCubit extends Cubit<LoginState> {
           );
         });
   }
+
 }

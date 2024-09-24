@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tp_bank/presentation/cubit/login_success_cubit.dart';
 import 'package:tp_bank/presentation/cubit/login_success_state_cubit.dart';
 
@@ -106,8 +107,8 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                                       color: Colors.white, width: 2)),
                               child: SvgPicture.asset(
                                 'assets/images/ic_qr_login_term.svg',
-                                width: 40,
-                                height: 40,
+                                width: 47,
+                                height: 47,
                               ),
                             ),
                             const Positioned.fill(
@@ -131,31 +132,36 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                               children: [
                                 const Text(
                                   'Xin chào',
-                                  style: TextStyle(color: Color(0xFFC48066)),
+                                  style: TextStyle(color: Colors.grey),
                                 ),
                                 Text(
-                                  SharedManager.instance.getUserName(),
+                                  SharedManager.instance.getUserName().toUpperCase(),
                                   style: const TextStyle(
-                                      color: Color(0xFFC48066),
+                                      color: Color(0xFF2B1F51),
                                       fontWeight: FontWeight.bold),
                                 ),
                                 const Text(
                                   'Chúc bạn một ngày mới tốt lành',
-                                  style: TextStyle(color: Color(0xFFC48066)),
+                                  style: TextStyle(color: Colors.grey),
                                 ),
                               ],
                             ),
                           ],
                         ),
                         const Spacer(),
-                        SvgPicture.asset(
-                            width: 30,
-                            height: 30,
-                            'assets/images/commonsdk_ic_not_you.svg')
+                        GestureDetector(
+                          onTap: () {
+                            context.push('/login');
+                          },
+                          child: SvgPicture.asset(
+                              width: 30,
+                              height: 30,
+                              'assets/images/commonsdk_ic_not_you.svg'),
+                        )
                       ],
                     ),
                   ),
-                  const SizedBox(height: 100),
+                  const SizedBox(height: 150),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: TextFormField(
@@ -257,16 +263,16 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                       children: [
                         _contentApp('assets/images/ic_etoken_kyc.webp',
                             'Smart OTP từ\neToken+',
-                            opacity: 0.6),
+                            opacity: 0.3),
                         _contentApp(
                             'assets/images/ic_chatpay_login.svg', 'ChatPay',
-                            opacity: 0.5),
+                            opacity: 0.3),
                         _contentApp(
                             'assets/images/ic_qr_login_30dp.svg', 'QR Pay',
                             opacity: 0.4),
                         _contentApp('assets/images/ic_notify_balance_login.svg',
                             'Thông báo\nsố dư/Cảnh\nbáo',
-                            opacity: 0.3),
+                            opacity: 0.4),
                       ],
                     ),
                   ),
@@ -313,8 +319,8 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
           width: 75,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: const Color(0xFFf4f2f7).withOpacity(opacity ?? 1)),
+              borderRadius: BorderRadius.circular(20),
+              color: const Color(0xFFD2BBFF).withOpacity(opacity ?? 1)),
           child: asset.contains('svg')
               ? SvgPicture.asset(
                   asset,

@@ -21,9 +21,9 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
 
   void login(BuildContext context) async {
     try {
-      print('-----------${SharedManager.instance.getUserName}');
+      print('-------------------${SharedManager.instance.getUserNameLogin()}');
       var response = await loginRepository.executeLogin(
-          SharedManager.instance.getUserName(), passwordController.text);
+          SharedManager.instance.getUserNameLogin(), passwordController.text);
       if (response['status'] == 200) {
         SharedManager.instance.save(userNameController.text, 'userName');
         SharedManager.instance.setUserName(response['data']['name']);
@@ -37,7 +37,8 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
         print('Error response data: ${e.response?.data}');
         print('Error status code: ${e.response?.statusCode}');
         if(e.response?.statusCode == 401) {
-          emit(state.copyWith(message: e.response?.data['detail']));
+          showDialogErrEmpty(context,e.response?.data['detail']);
+          emit(state.copyWith(message: ''));
           return;
         }
         if (e.response?.statusCode == 500) {
@@ -59,8 +60,11 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
         context: context,
         builder: (context) {
           return CupertinoAlertDialog(
-            title: const Text("Tài Khoản Đã Bị Tạm Khoá"),
-            content:  Text(message),
+            title: const Text(
+              "Thông báo",
+              style: TextStyle(fontFamily: 'roboto'),
+            ),
+            content: Text(message),
             actions: <Widget>[
               CupertinoDialogAction(
                 onPressed: () {
@@ -70,11 +74,15 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
                 child: const Text(
                   "Đóng",
                   style: TextStyle(
-                      color: CupertinoColors.activeOrange, fontSize: 16),
+                      color: CupertinoColors.activeOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'roboto'),
                 ),
               ),
               CupertinoDialogAction(
-                onPressed: () async{
+                onPressed: () async {
+                  context.pop();
                   final Uri launchUri = Uri(
                     scheme: 'tel',
                     path: '1900585885',
@@ -84,9 +92,43 @@ class LoginSuccessCubit extends Cubit<LoginSuccessState> {
                 child: const Text(
                   "Gọi ngay",
                   style: TextStyle(
-                      color: CupertinoColors.activeOrange, fontSize: 16),
+                      color: CupertinoColors.activeOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'roboto'),
                 ),
               )
+            ],
+          );
+        });
+  }
+
+
+  showDialogErrEmpty(BuildContext context, String message) {
+    showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            title: const Text(
+              "Thông báo",
+              style: TextStyle(fontFamily: 'roboto'),
+            ),
+            content: Text(message),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                onPressed: () {
+                  context.pop();
+                },
+                isDefaultAction: true,
+                child: const Text(
+                  "Đóng",
+                  style: TextStyle(
+                      color: CupertinoColors.activeOrange,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'roboto'),
+                ),
+              ),
             ],
           );
         });

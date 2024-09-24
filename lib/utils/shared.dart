@@ -44,6 +44,14 @@ class SharedManager {
    return prefs.getString('keyName') ?? '';
   }
 
+  void setUserNameLogin(String text) async {
+    await prefs.setString('userName', text);
+  }
+
+  String getUserNameLogin() {
+    return prefs.getString('userName') ?? '';
+  }
+
   static clearAll() {
     prefs.clear();
   }
