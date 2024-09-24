@@ -209,7 +209,7 @@ class LoginSuccess2 extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: const Color(0xFFf4f2f7).withOpacity(0.5)),
+              color:  const Color(0xFFf4f2f7).withOpacity(opacity ?? 0)),
           child: asset.contains('svg')
               ? SvgPicture.asset(
             asset,
