@@ -11,6 +11,7 @@ import 'package:tp_bank/utils/shared.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ApiConfig();
+  SharedManager();
   await SharedManager.init();
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Color(0xFF7B35BB), // navigation bar color
