@@ -101,14 +101,13 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
                         Stack(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.white, width: 2)),
                               child: SvgPicture.asset(
                                 'assets/images/ic_qr_login_term.svg',
-                                width: 47,
-                                height: 47,
+                                width: 50,
+                                height: 50,
                               ),
                             ),
                             const Positioned.fill(
@@ -316,10 +315,9 @@ class _LoginPageSuccessState extends State<LoginPageSuccess> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Container(
-          width: 75,
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
               color: const Color(0xFFD2BBFF).withOpacity(opacity ?? 1)),
           child: asset.contains('svg')
               ? SvgPicture.asset(

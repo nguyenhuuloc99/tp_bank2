@@ -94,14 +94,13 @@ class LoginSuccess2 extends StatelessWidget {
                         Stack(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(5),
                               decoration: BoxDecoration(
                                   border: Border.all(
                                       color: Colors.white, width: 2)),
                               child: SvgPicture.asset(
                                 'assets/images/ic_qr_login_term.svg',
-                                width: 47,
-                                height: 47,
+                                width: 50,
+                                height: 50,
                               ),
                             ),
                             const Positioned.fill(
